@@ -59,12 +59,3 @@ CORE.register('bar', {
 		console.log(this);
 	}
 });
-
-
-// var Mod = {
-// 	init: function () {
-// 		console.log(this);
-// 	}
-// }
-
-// Mod.init();
