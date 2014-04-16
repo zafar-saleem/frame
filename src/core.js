@@ -157,9 +157,19 @@ var CORE = {
     }
 	},
 	
+	/**
+	 * @desc Pub/Sub system that stores events in object and then triggers them when
+	 * requires. 
+	 */
 	Events: {
-		eventsData: {},
-	
+		eventsData: {}, // all events are stored here
+		
+		/**
+		 * Stores events and context in eventsData object as key value pair
+		 * @param {String} Event name
+		 * @param {Object} Context(this) to module from where this events is triggered
+		 * @return {}
+		 */
 		trigger: function (events, context) {
 			if (!events && typeof events !== 'string') return;
 			if (this.eventsData.hasOwnProperty(events)) {
@@ -168,7 +178,14 @@ var CORE = {
 			}
 			this.eventsData[events] = context;
 		},
-	
+		
+		/**
+		 * Calls events when required
+		 * @param {String} Event name
+		 * @param {Function} Callback function that needs to be called upon
+		 * @param {Object} Context(this) to module from where listen() function id called
+		 * @return {}
+		 */
 		listen: function (events, callback, context) {
 			if (!events && typeof events !== 'string') return;
 			if (this.eventsData.hasOwnProperty(events)) {
@@ -177,12 +194,17 @@ var CORE = {
 			}
 		},
 
+		/**
+		 * Get context
+		 * @param {Object} Context(this) to module from where this events is triggered
+		 * @return {}
+		 */
 		getContext: function (context, module) {
 			if (context && typeof context === 'object') return context;
 			if (module && typeof module === 'object') return module;
 		}
 	},
-
+	
 	_isMethod: function (method) {
 		return (method && typeof method === 'function');
 	},
