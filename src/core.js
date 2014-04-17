@@ -205,18 +205,38 @@ var CORE = {
 		}
 	},
 	
+	/**
+	 * Check if paramter is a function
+	 * @param {Function}
+	 * @return {Boolean}
+	 */
 	_isMethod: function (method) {
 		return (method && typeof method === 'function');
 	},
 
+	/**
+	 * Check if paramter is an Object
+	 * @param {Object}
+	 * @return {Boolean}
+	 */
 	_isObject: function (object) {
 		return (object && typeof object === 'object');
 	},
 
+	/**
+	 * Check if paramter is a String
+	 * @param {String}
+	 * @return {Boolean}
+	 */
 	_isString: function (str) {
 		return (str && typeof str === 'string');
 	},
 
+	/**
+	 * Log function
+	 * @param {Number} 1-3
+	 * @param {String} Message
+	 */
 	_log: function (severity, message) {
 		console[(severity === 1 ? 'log' : (severity === 2) ? 'warn' : 'error')](message);
 	}
