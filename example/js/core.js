@@ -1,35 +1,16 @@
-/*
- * @desc CORE module/Object that consists of core functions
- * @author Zafar Saleem
- */
 var CORE = {
-	/**
-	 * Main object that consists details for all modules upon registering.
-	 * Modules are stored as 
-	 * modulesData: {
-	 * 		modules: {
-	 *			nameofmodule: object
-	 * 		}
-	 * }
-	 */
+
 	modulesData: {},
 
-	/**
-	 * @desc Register method registers modules and stores them in
-	 * modulesData object.
-	 * @param {string} name of module
-	 * @param {object} object of module
-	 * @return {}
-	 */
 	register: function (module, obj) {
 		if (this._isString(module) && this._isObject(obj)) {
 			if (!this._isMethod(obj.init)) {
 				this._log(3, 'Module does not have init function');
 				return;
 			}
-			// If modules object inside modulesData does not exist then create one
+
 			if (typeof this.modulesData.modules === 'undefined') this.modulesData['modules'] = {};
-			this.modulesData.modules[module] = obj; // Store module's object inside modulesData.modules
+			this.modulesData.modules[module] = obj;
 
 			if (typeof this.modulesData.$container === 'undefined') this.modulesData['$container'] = {};
 			this.modulesData['$container'] = $('#' + module);
@@ -42,71 +23,36 @@ var CORE = {
 		}
 	},
 
-	/**
-	 * @desc This method initialize single module stored in modulesData: {}
-	 * @param {object} Module that iscludes all methods
-	 * @return {}
-	 */
 	start: function (module) {
 		if (this._isMethod(module)) return;
 		module.init.bind(module).apply();
 	},
 
-	/**
-	 * @desc This method initializes all modules stored in modulesData: {}
-	 * by calling start method
-	 * @param {object} Module that iscludes all methods
-	 * @return {}
-	 */
 	startAll: function () {
 		var modules = this.modulesData.modules;
 
 		if (typeof modules === 'undefined') return;
-		if (Object.keys(modules).length <= 0) return; // if there are no modules registered then do nothing
+		if (Object.keys(modules).length <= 0) return;
 		for (var keys in modules) {
 			if (!modules.hasOwnProperty(keys)) return;
 			this.start(modules[keys]);
 		}
 	},
 
-	/**
-	 * @desc This method stop initialization of single modules stored in modulesData: {}
-	 * @param {object} Module that iscludes all methods
-	 * @return {}
-	 */
 	stop: function () {
 		console.log('stop');
 	},
 
-	/**
-	 * @desc This method stop initialization of all modules stored in modulesData: {}
-	 * by calling stop method
-	 * @param {object} Module that iscludes all methods
-	 * @return {}
-	 */
 	stopAll: function () {
 
 	},
 
-	/**
-	 * @desc Object that adds events to selectors and call callback functions
-	 * in a module. This modules is for following events object
-	 * events: {
-	 *		'click #selector': 'callback'
-	 * }
-	 */
 	AggregatedEvents: {
 		config: {
 			context: null,
 			callback: null
 		},
-		
-		/**
-		 * @desc constructor function that initialize AggregatedEvents object,
-		 * it gets callback function from events object and store it in config.callback,
-		 * then calls applyEvents method.
-		 * @param {object} context of modules where events object is defined
-		 */
+
 		init: function (context) {
 			var events = context.events, keys;
 			if (!CORE._isObject(events)) return;
@@ -119,14 +65,7 @@ var CORE = {
         this.applyEvents(keys);
 			}
 		},
-		
-		/**
-		 * @desc Checks for multiple selectors, if given then seperate them and put them
-		 * in an array then bind events to all those selectors.
-		 * If single selector is given then apply event to that selector.
-		 * @param {string} properties of events object
-		 * @return {}
-		 */
+
 		applyEvents: function (keys) {
 			var i, len, selectors = this.getSelectors(keys.split(" "));
 
@@ -140,12 +79,7 @@ var CORE = {
         this.bindEvents(keys.split(" ")[0], selectors[i]);
       }
 		},
-		
-		/**
-		 * @desc It binds event to selector and call callback function
-		 * @param {evt} event name e.g. click, hover etc that needs to attached to selector
-		 * @param {string} selector on which event needs to be attached.
-		 */
+    
 		bindEvents: function (evt, selector) {
       $(document).on(evt, selector, this.config.callback.bind(this.config.context));
     },
