@@ -1,3 +1,7 @@
+// This declares to JSHint that $ is a global variable, 
+// and the false indicates that it should not be overridden
+/*global $:false, jQuery:false */
+
 /*
  * @desc CORE module/Object that consists of core functions
  * @author Zafar Saleem
