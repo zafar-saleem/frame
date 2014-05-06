@@ -43,7 +43,7 @@
     "couch"         : false,
     "devel"         : true,
     "dojo"          : false,
-    "jquery"        : false,
+    "jquery"        : true,
     "mootools"      : false,
     "node"          : false,
     "nonstandard"   : false,
