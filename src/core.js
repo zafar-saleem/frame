@@ -1,9 +1,5 @@
-// This declares to JSHint that $ is a global variable, 
-// and the false indicates that it should not be overridden
-/*global $:false, jQuery:false */
-
 /*
- * @desc CORE module/Object that consists of core functions
+ * CORE module/Object that consists of core functions
  * @author Zafar Saleem
  */
 var CORE = {
@@ -19,7 +15,7 @@ var CORE = {
 	modulesData: {},
 
 	/**
-	 * @desc Register method registers modules and stores them in
+	 * Register method registers modules and stores them in
 	 * modulesData object.
 	 * @param {string} name of module
 	 * @param {object} object of module
@@ -47,7 +43,7 @@ var CORE = {
 	},
 
 	/**
-	 * @desc This method initialize single module stored in modulesData: {}
+	 * This method initialize single module stored in modulesData: {}
 	 * @param {object} Module that iscludes all methods
 	 * @return {}
 	 */
@@ -57,7 +53,7 @@ var CORE = {
 	},
 
 	/**
-	 * @desc This method initializes all modules stored in modulesData: {}
+	 * This method initializes all modules stored in modulesData: {}
 	 * by calling start method
 	 * @param {object} Module that iscludes all methods
 	 * @return {}
@@ -74,7 +70,7 @@ var CORE = {
 	},
 
 	/**
-	 * @desc This method stop initialization of single modules stored in modulesData: {}
+	 * This method stop initialization of single modules stored in modulesData: {}
 	 * @param {object} Module that iscludes all methods
 	 * @return {}
 	 */
@@ -83,7 +79,7 @@ var CORE = {
 	},
 
 	/**
-	 * @desc This method stop initialization of all modules stored in modulesData: {}
+	 * This method stop initialization of all modules stored in modulesData: {}
 	 * by calling stop method
 	 * @param {object} Module that iscludes all methods
 	 * @return {}
@@ -93,7 +89,7 @@ var CORE = {
 	},
 
 	/**
-	 * @desc Object that adds events to selectors and call callback functions
+	 * Object that adds events to selectors and call callback functions
 	 * in a module. This modules is for following events object
 	 * events: {
 	 *		'click #selector': 'callback'
@@ -106,7 +102,7 @@ var CORE = {
 		},
 		
 		/**
-		 * @desc constructor function that initialize AggregatedEvents object,
+		 * constructor function that initialize AggregatedEvents object,
 		 * it gets callback function from events object and store it in config.callback,
 		 * then calls applyEvents method.
 		 * @param {object} context of modules where events object is defined
@@ -125,7 +121,7 @@ var CORE = {
 		},
 		
 		/**
-		 * @desc Checks for multiple selectors, if given then seperate them and put them
+		 * Checks for multiple selectors, if given then seperate them and put them
 		 * in an array then bind events to all those selectors.
 		 * If single selector is given then apply event to that selector.
 		 * @param {string} properties of events object
@@ -146,7 +142,7 @@ var CORE = {
 		},
 		
 		/**
-		 * @desc It binds event to selector and call callback function
+		 * It binds event to selector and call callback function
 		 * @param {evt} event name e.g. click, hover etc that needs to attached to selector
 		 * @param {string} selector on which event needs to be attached.
 		 */
@@ -162,7 +158,7 @@ var CORE = {
 	},
 	
 	/**
-	 * @desc Pub/Sub system that stores events in object and then triggers them when
+	 * Pub/Sub system that stores events in object and then triggers them when
 	 * requires. 
 	 */
 	Events: {
