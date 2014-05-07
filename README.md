@@ -55,6 +55,14 @@ CORE.register('newModuleName', {
   }
 });
 </pre>
+In order to initialize all modules call CORE.startAll() method.
+<pre>
+CORE.startAll();
+</pre>
+In order to start a particular module then simply call start() method and pass the name of the module.
+<pre>
+CORE.start('moduleName');
+</pre>
 <h1>Directory structure</h1>
 <pre>example</pre> directory consists of an example on how to use the framework. It shows basic usage of how modules could be registered, events and pub/sub could be used etc.
 <pre>src</pre> directory contains the source file i.e. core.js of the framework.
