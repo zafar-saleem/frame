@@ -28,6 +28,10 @@ CORE.register('moduleName', {
   
   init: function () {
     //initialize this module.
+  },
+  
+  callbackFunction: function () {
+    
   }
 });
 </pre>
