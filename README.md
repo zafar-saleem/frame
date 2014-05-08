@@ -68,5 +68,18 @@ In order to start a particular module then simply call start() method and pass t
 CORE.start('moduleName');
 </pre>
 <h1>Directory structure</h1>
-<pre>example</pre> directory consists of an example on how to use the framework. It shows basic usage of how modules could be registered, events and pub/sub could be used etc.
-<pre>src</pre> directory contains the source file i.e. core.js of the framework.
+<pre>
+example
+  js
+    core.js
+    filter.js
+    jquery.js
+    search.js
+  index.html
+  src
+    core.js
+  .jshintrc
+  Gruntfile.js
+  README.md
+  package.json
+</pre>
