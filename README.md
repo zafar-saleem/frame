@@ -75,7 +75,7 @@ example
     filter.js
     jquery.js
     search.js
-    index.html
+  index.html
 src
   core.js
 .jshintrc
