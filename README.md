@@ -70,12 +70,12 @@ CORE.start('moduleName');
 <h1>Directory structure</h1>
 <pre>
 example
-js
-  core.js
-  filter.js
-  jquery.js
-  search.js
-index.html
+  js
+    core.js
+    filter.js
+    jquery.js
+    search.js
+    index.html
 src
   core.js
 .jshintrc
