@@ -8,11 +8,19 @@ module.exports = function (grunt) {
 			target: {
 				src: 'src/core.js'
 			}
+		},
+
+		jasmine: {
+			src: 'src/*.js',
+			options: {
+				specs: 'tests/specs/*.js'
+			}
 		}
 
 	});
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	
-	grunt.registerTask('default', ['jshint']);
+	grunt.registerTask('default', ['jshint', 'jasmine']);
 }

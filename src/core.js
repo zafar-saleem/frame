@@ -1,72 +1,3 @@
-/**
- * Object that adds events to selectors and call callback functions
- * in a module. This modules is for following events object
- * events: {
- *		'click #selector': 'callback'
- * }
- */
-var AggregatedEvents = {
-	config: {
-		context: null,
-		callback: null
-	},
-	
-	/**
-	 * constructor function that initialize AggregatedEvents object,
-	 * it gets callback function from events object and store it in config.callback,
-	 * then calls applyEvents method.
-	 * @param {object} context of modules where events object is defined
-	 */
-	init: function (context) {
-		var events = context.events, keys;
-		if (!CORE._isObject(events)) return;
-
-		this.config.context = context;
-		for (keys in events) {
-			if (!events.hasOwnProperty(keys)) return;
-			this.config.callback = context[events[keys]];
-    		if (!CORE._isMethod(this.config.callback)) return;
-    		this.applyEvents(keys);
-		}
-	},
-	
-	/**
-	 * Checks for multiple selectors, if given then seperate them and put them
-	 * in an array then bind events to all those selectors.
-	 * If single selector is given then apply event to that selector.
-	 * @param {string} properties of events object
-	 * @return {}
-	 */
-	applyEvents: function (keys) {
-		var i, len, selectors = this.getSelectors(keys.split(" "));
-
-		if (selectors.length === 1) {
-			this.bindEvents(keys.split(" ")[0], keys.split(" ")[1]);
-			return;
-		}
-
-		for (i = 0, len = selectors.length; i < len; i++) {
-			if (selectors[i] === 0) continue;
-			this.bindEvents(keys.split(" ")[0], selectors[i]);
-		}
-	},
-	
-	/**
-	 * It binds event to selector and call callback function
-	 * @param {evt} event name e.g. click, hover etc that needs to attached to selector
-	 * @param {string} selector on which event needs to be attached.
-	 */
-	bindEvents: function (evt, selector) {
-      	$(document).on(evt, selector, this.config.callback.bind(this.config.context));
-    },
-
-	getSelectors: function (arr) {
-		return arr.filter(function (item, index) {
-			return (index !== 0) || item;
-		});
-    }
-};
-
 /*
  * CORE module/Object that consists of core functions
  * @author Zafar Saleem
@@ -104,7 +35,7 @@ var CORE = {
 			this.modulesData['$container'] = $('#' + module);
 
 			if (obj.events && typeof obj.events === 'object') {
-				AggregatedEvents.init(obj);
+				CORE.AggregatedEvents.init(obj);
 			}
 		} else {
 			this._log(3, 'Module name should be String & obj should be Object');
@@ -155,6 +86,75 @@ var CORE = {
 	 */
 	stopAll: function () {
 
+	},
+
+	/**
+	 * Object that adds events to selectors and call callback functions
+	 * in a module. This modules is for following events object
+	 * events: {
+	 *		'click #selector': 'callback'
+	 * }
+	 */
+	AggregatedEvents: {
+		config: {
+			context: null,
+			callback: null
+		},
+		
+		/**
+		 * constructor function that initialize AggregatedEvents object,
+		 * it gets callback function from events object and store it in config.callback,
+		 * then calls applyEvents method.
+		 * @param {object} context of modules where events object is defined
+		 */
+		init: function (context) {
+			var events = context.events, keys;
+			if (!CORE._isObject(events)) return;
+
+			this.config.context = context;
+			for (keys in events) {
+				if (!events.hasOwnProperty(keys)) return;
+				this.config.callback = context[events[keys]];
+	    		if (!CORE._isMethod(this.config.callback)) return;
+	    		this.applyEvents(keys);
+			}
+		},
+		
+		/**
+		 * Checks for multiple selectors, if given then seperate them and put them
+		 * in an array then bind events to all those selectors.
+		 * If single selector is given then apply event to that selector.
+		 * @param {string} properties of events object
+		 * @return {}
+		 */
+		applyEvents: function (keys) {
+			var i, len, selectors = this.getSelectors(keys.split(" "));
+
+			if (selectors.length === 1) {
+				this.bindEvents(keys.split(" ")[0], keys.split(" ")[1]);
+				return;
+			}
+
+			for (i = 0, len = selectors.length; i < len; i++) {
+				if (selectors[i] === 0) continue;
+				this.bindEvents(keys.split(" ")[0], selectors[i]);
+			}
+		},
+		
+		/**
+		 * It binds event to selector and call callback function
+		 * @param {evt} event name e.g. click, hover etc that needs to attached to selector
+		 * @param {string} selector on which event needs to be attached.
+		 */
+		bindEvents: function (evt, selector) {
+	      	$(document).on(evt, selector, this.config.callback.bind(this.config.context));
+	    },
+
+		getSelectors: function (arr) {
+			return arr.filter(function (item, index) {
+				return (index !== 0) || item;
+			});
+	    }
 	},
 	
 	/**
