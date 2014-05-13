@@ -207,6 +207,7 @@ var CORE = {
 	
 	/**
 	 * Check if paramter is a function
+	 * @private
 	 * @param {Function}
 	 * @return {Boolean}
 	 */
@@ -216,6 +217,7 @@ var CORE = {
 
 	/**
 	 * Check if paramter is an Object
+	 * @private
 	 * @param {Object}
 	 * @return {Boolean}
 	 */
@@ -225,6 +227,7 @@ var CORE = {
 
 	/**
 	 * Check if paramter is a String
+	 * @private
 	 * @param {String}
 	 * @return {Boolean}
 	 */
@@ -234,6 +237,7 @@ var CORE = {
 
 	/**
 	 * Log function
+	 * @private
 	 * @param {Number} 1-3
 	 * @param {String} Message
 	 */
