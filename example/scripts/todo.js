@@ -44,7 +44,7 @@ FRAME.register('Todo', {
         this.itemId = $span.attr('id');
         this.$textfield.val($span.text());
         this.$textfield.focus();
-        this.$button.text('Update').attr('id', 'update');
+        this.$button.text('Update').attr('id', 'update').removeClass('btn-success').addClass('btn-primary');
     },
 
     updateItem: function () {
@@ -53,7 +53,7 @@ FRAME.register('Todo', {
         $span.text(item);
         this._emptyTextfield();
         this.$textfield.focus();
-        this.$button.text('Add').attr('id', 'add');
+        this.$button.text('Add').attr('id', 'add').removeClass('btn-primary').addClass('btn-success');
     },
 
     _emptyTextfield: function () {

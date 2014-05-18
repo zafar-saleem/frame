@@ -4,18 +4,20 @@
 	<meta charset="UTF-8">
 	<title>Todo list</title>
 	<link rel="stylesheet" href="styles/bootstrap.min.css">
-	<!-- <link rel="stylesheet" href="styles/styles.css"> -->
+	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container container-fluid">
         <h3>Todo List</h3>
-        <div id="todo">
-            <input type="text" name="item" class="item">
-            <button type="button" id="btn-add" class="button">Add</button>
-            <hr>
+        <div id="todo" class="row">
+        	<form class="form-inline" role="form">
+	            <input type="text" name="item" class="form-control item">
+	            <button type="button" id="btn-add" class="btn btn-success button">Add</button>
+	            <hr>
+            </form>
             <ul id="items">
-                
-            </ul>
+	                
+	        </ul>
         </div>
     </div>
 	<script src="scripts/jquery.js"></script>
