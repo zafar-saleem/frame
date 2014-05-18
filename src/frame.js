@@ -243,6 +243,7 @@ var FRAME = {
 
 	/**
 	 * Creates DOM element.
+	 * @private
 	 * @param {object} DOM element that will be created by this method
 	 * @return {object} Created DOM element
 	 */
@@ -251,7 +252,8 @@ var FRAME = {
     },
 
     /**
-	 * Apply attributes i.e. id, class, href etc to created element.
+	 * Apply attributes i.e. id, class, href etc to create element.
+	 * @private
 	 * @param {object} DOM element to which attributes will be applied
 	 * @param {object} attributes object that has id, class etc.
 	 * @return {}
@@ -260,6 +262,12 @@ var FRAME = {
         $(el).attr(attrs);
     },
 
+    /**
+	 * Check for array.
+	 * @private
+	 * @param {array} Array to check if it is array.
+	 * @return {boolean} true/false
+	 */
     _isArray: function (arr) {
 		return (Array.isArray(arr));
 	},
@@ -268,7 +276,7 @@ var FRAME = {
 	 * Check if paramter is a function
 	 * @private
 	 * @param {Function}
-	 * @return {Boolean}
+	 * @return {Boolean} true/false
 	 */
 	_isMethod: function (method) {
 		return (method && typeof method === 'function');
@@ -278,7 +286,7 @@ var FRAME = {
 	 * Check if paramter is an Object
 	 * @private
 	 * @param {Object}
-	 * @return {Boolean}
+	 * @return {Boolean} true/false
 	 */
 	_isObject: function (object) {
 		return (object && typeof object === 'object');
@@ -288,7 +296,7 @@ var FRAME = {
 	 * Check if paramter is a String
 	 * @private
 	 * @param {String}
-	 * @return {Boolean}
+	 * @return {Boolean} true/false
 	 */
 	_isString: function (str) {
 		return (str && typeof str === 'string');
