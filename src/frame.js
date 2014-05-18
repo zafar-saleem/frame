@@ -241,6 +241,10 @@ var FRAME = {
     _applyAttrs: function (el, attrs) {
         $(el).attr(attrs);
     },
+
+    _isArray: function (arr) {
+		return (Array.isArray(arr));
+	},
 	
 	/**
 	 * Check if paramter is a function
