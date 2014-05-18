@@ -97,6 +97,13 @@ var FRAME = {
 		}
 	},
 
+	/**
+	 * Creates new DOM element and apply all attributes such as
+	 * Class name, id, href etc.
+	 * @param {object} DOM element that will be created by this method
+	 * @param {object} List of attributes i.e. id, class, href etc.
+	 * @return {object} Created DOM element
+	 */
 	createElement: function (el, config) {
         var i, text, child,
         el = this._create(el);
