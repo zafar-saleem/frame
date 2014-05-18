@@ -70,31 +70,21 @@ var FRAME = {
 	},
 
 	/**
-	 * This method stop initialization of single modules stored in modulesData: {}
-	 * @param {object} Module that iscludes all methods
+	 * description
+	 * @param {} 
 	 * @return {}
 	 */
-	stop: function (module) {
-		if (this._isMethod(module)) return;
-		module.destory.bind(module).apply();
+	stop: function () {
+		// to be implemented
 	},
 
 	/**
-	 * This method stop initialization of all modules stored in modulesData: {}
-	 * by calling stop method
-	 * @param {object} Module that iscludes all methods
+	 * description
+	 * @param {}
 	 * @return {}
 	 */
 	stopAll: function () {
-		var modules = this.modulesData.modules;
-
-		if (typeof modules === 'undefined') return;
-		// if there are no modules registered then do nothing
-		if (Object.keys(modules).length <= 0) return;
-		for (var keys in modules) {
-			if (!modules.hasOwnProperty(keys)) return;
-			this.stop(modules[keys]);
-		}
+		// to be implemented
 	},
 
 	/**
