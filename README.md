@@ -71,11 +71,11 @@ $('body').append(FRAME.createElement('ul', {
 </pre>
 The above code will create below html markup.
 <pre>
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+&lt;ul&gt;
+    &lt;li&gt;Item&lt;/li&gt;
+    &lt;li&gt;Delete&lt;/li&gt;
+    &lt;li&gt;Update&lt;/li&gt;
+&lt;/ul&gt;
 </pre>
 In order to initialize all modules call CORE.startAll() method.
 <pre>
