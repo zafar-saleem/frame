@@ -95,7 +95,7 @@ var CORE = {
 			if (!modules.hasOwnProperty(keys)) return;
 			this.stop(modules[keys]);
 		}
-	},,
+	},
 
 	/**
 	 * Object that adds events to selectors and call callback functions
