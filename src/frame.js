@@ -97,6 +97,26 @@ var FRAME = {
 		}
 	},
 
+	createElement: function (el, config) {
+        var i, text, child,
+        el = this._create(el);
+        if (!config) return;
+        if (config.children && this._isArray(config.children)) {
+            i = 0;
+            while(child = config.children[i]) {
+                el.appendChild(child);
+                i++;
+            }
+            delete config.children;
+        }
+        if (config.text) {
+            el.appendChild(document.createTextNode(config.text));
+            delete config.text;
+        }
+        this._applyAttrs(el, config);
+        return el;
+    },
+
 	/**
 	 * Object that adds events to selectors and call callback functions
 	 * in a module. This modules is for following events object
