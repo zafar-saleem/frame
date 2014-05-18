@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 				jshintrc: '.jshintrc'
 			},
 			target: {
-				src: 'src/core.js'
+				src: 'src/frame.js'
 			}
 		},
 
