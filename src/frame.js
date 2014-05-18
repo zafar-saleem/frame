@@ -70,24 +70,6 @@ var FRAME = {
     },
 
     /**
-     * description
-     * @param {} 
-     * @return {}
-     */
-    stop: function () {
-    	// to be implemented
-    },
-
-    /**
-     * description
-     * @param {}
-     * @return {}
-     */
-    stopAll: function () {
-    	// to be implemented
-    },
-
-    /**
      * Creates new DOM element and apply all attributes such as
      * Class name, id, href etc.
      * @param {object} DOM element that will be created by this method
