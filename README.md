@@ -59,6 +59,24 @@ CORE.register('newModuleName', {
   }
 });
 </pre>
+A new method i.e. createElement() is added. It allows us to create DOM element by giving proper attributes and even children DOM elements with its own attribute. See example below in action.
+<pre>
+$('body').append(FRAME.createElement('ul', {
+    children: [
+        FRAME.createElement('li', { 'class': 'li', text: 'item' }),
+        FRAME.createElement('li', { 'class': 'li', text: 'Delete' }),
+        FRAME.createElement('li', { 'class': 'li', text: 'Update' })
+    ]
+}));
+</pre>
+The above code will create below html markup.
+<pre>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</pre>
 In order to initialize all modules call CORE.startAll() method.
 <pre>
 CORE.startAll();
