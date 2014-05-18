@@ -1,9 +1,9 @@
-<p>Frame is a JavaScript framework. It consists CORE.js file which consists core functionality. At the moment, frame API offers some useful and handy functions such as registering new modules, starting(initializing) and stopping(uninitializing) all or particular modules. It also offers aggregatedEvents system(inspired from backbonejs events system) and pub/sub. Frame is completely scalable framework which separates modules and ensure loose coupling among modules. COREjs file also acts like an interface between two modules.</p>
+<p>Frame is a JavaScript framework. It consists FRAME.js file which consists CORE functionality. At the moment, frame API offers some useful and handy functions such as registering new modules, starting(initializing) and stopping(uninitializing) all or particular modules. It also offers aggregatedEvents system(inspired from backbonejs events system) and pub/sub. Frame is completely scalable framework which separates modules and ensure loose coupling among modules. FRAMEjs file also acts like an interface between two modules.</p>
 <h1>How to use</h1>
-<p>In order to create/register new module, simply call CORE.register() function and pass 'name' of the module as first parameter and object literal as second parameter.</p>
+<p>In order to create/register new module, simply call FRAME.register() function and pass 'name' of the module as first parameter and object literal as second parameter.</p>
 
 <pre>
-CORE.register('moduleName', {
+FRAME.register('moduleName', {
   // rest of the code
 });
 </pre>
@@ -11,7 +11,7 @@ CORE.register('moduleName', {
 <p>Every new module must contain one init function(which acts like a constructor). It is used to initialize the module.</p>
 
 <pre>
-CORE.register('moduleName', {
+FRAME.register('moduleName', {
   init: function () {
     //initialize this module.
   }
@@ -21,7 +21,7 @@ CORE.register('moduleName', {
 <p>In order to use aggregatedEvents system, add an events object and pass name of the event and DOM elements on which that event is attached to as keys and callback function as values.</p>
 
 <pre>
-CORE.register('moduleName', {
+FRAME.register('moduleName', {
   events: {
     'click #button': 'callbackFunction'
   },
@@ -36,22 +36,22 @@ CORE.register('moduleName', {
 });
 </pre>
 
-<p>To use pub/sub events system, call CORE.Events.trigger() function to trigger and event and CORE.Events.listen() to listen the triggered events.</p>
+<p>To use pub/sub events system, call FRAME.Events.trigger() function to trigger and event and FRAME.Events.listen() to listen the triggered events.</p>
 
 <pre>
-CORE.register('moduleName', {
+FRAME.register('moduleName', {
   events: {
     'click #button': 'callbackFunction'
   },
   
   init: function () {
-    CORE.Events.trigger('eventsName');
+    FRAME.Events.trigger('eventsName');
   }
 });
 
-CORE.register('newModuleName', {
+FRAME.register('newModuleName', {
   init: function () {
-    CORE.Events.listen('eventsName', callback);
+    FRAME.Events.listen('eventsName', callback);
   },
   
   callback: function () {
@@ -77,25 +77,28 @@ $('body').append(FRAME.createElement('ul', {
     &lt;li&gt;Update&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
-<p>In order to initialize all modules call CORE.startAll() method.</p>
+<p>In order to initialize all modules call FRAME.startAll() method.</p>
 <pre>
-CORE.startAll();
+FRAME.startAll();
 </pre>
 <p>In order to start a particular module then simply call start() method and pass the name of the module.</p>
 <pre>
-CORE.start('moduleName');
+FRAME.start('moduleName');
 </pre>
 <h1>Directory structure</h1>
 <pre>
 example
   js
-    core.js
-    filter.js
-    jquery.js
-    search.js
+    scripts
+        FRAME.js
+        jquery.js
+        todo.js
+    styles
+        bootstrap.min.css
+        styles.css
   index.html
 src
-  core.js
+  FRAME.js
 .jshintrc
 Gruntfile.js
 README.md
