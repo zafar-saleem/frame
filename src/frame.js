@@ -233,6 +233,10 @@ var FRAME = {
 			if (module && typeof module === 'object') return module;
 		}
 	},
+
+	_create: function (el) {
+        return document.createElement(el);
+    },
 	
 	/**
 	 * Check if paramter is a function
