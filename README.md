@@ -1,6 +1,6 @@
-Frame is a JavaScript framework. It consists CORE.js file which consists core functionality. At the moment, frame API offers some useful and handy functions such as registering new modules, starting(initializing) and stopping(uninitializing) all or particular modules. It also offers aggregatedEvents system(inspired from backbonejs events system) and pub/sub. Frame is completely scalable framework which separates modules and ensure loose coupling among modules. COREjs file also acts like an interface between two modules.
+<p>Frame is a JavaScript framework. It consists CORE.js file which consists core functionality. At the moment, frame API offers some useful and handy functions such as registering new modules, starting(initializing) and stopping(uninitializing) all or particular modules. It also offers aggregatedEvents system(inspired from backbonejs events system) and pub/sub. Frame is completely scalable framework which separates modules and ensure loose coupling among modules. COREjs file also acts like an interface between two modules.</p>
 <h1>How to use</h1>
-In order to create/register new module, simply call CORE.register() function and pass 'name' of the module as first parameter and object literal as second parameter.
+<p>In order to create/register new module, simply call CORE.register() function and pass 'name' of the module as first parameter and object literal as second parameter.</p>
 
 <pre>
 CORE.register('moduleName', {
@@ -8,7 +8,7 @@ CORE.register('moduleName', {
 });
 </pre>
 
-Every new module should contain one init function(which acts like a constructor) which is used to initialize that particular module.
+<p>Every new module must contain one init function(which acts like a constructor). It is used to initialize the module.</p>
 
 <pre>
 CORE.register('moduleName', {
@@ -18,7 +18,7 @@ CORE.register('moduleName', {
 });
 </pre>
 
-In order to use aggregatedEvents system, add an events object and pass name of the event and DOM elements on which that event is attached to as keys and callback function as values.
+<p>In order to use aggregatedEvents system, add an events object and pass name of the event and DOM elements on which that event is attached to as keys and callback function as values.</p>
 
 <pre>
 CORE.register('moduleName', {
@@ -36,7 +36,7 @@ CORE.register('moduleName', {
 });
 </pre>
 
-To use pub/sub events system, call CORE.Events.trigger() function to trigger and event and CORE.Events.listen() to listen the triggered events.
+<p>To use pub/sub events system, call CORE.Events.trigger() function to trigger and event and CORE.Events.listen() to listen the triggered events.</p>
 
 <pre>
 CORE.register('moduleName', {
@@ -59,7 +59,7 @@ CORE.register('newModuleName', {
   }
 });
 </pre>
-A new method i.e. createElement() is added. It allows us to create DOM element by giving proper attributes and even children DOM elements with its own attribute. See example below in action.
+<p>A new method i.e. createElement() is added. It allows us to create DOM element by giving proper attributes and even children DOM elements with its own attribute. See example below in action.</p>
 <pre>
 $('body').append(FRAME.createElement('ul', {
     children: [
@@ -69,7 +69,7 @@ $('body').append(FRAME.createElement('ul', {
     ]
 }));
 </pre>
-The above code will create below html markup.
+<p>The above code will create below html markup.</p>
 <pre>
 &lt;ul&gt;
     &lt;li&gt;Item&lt;/li&gt;
@@ -77,11 +77,11 @@ The above code will create below html markup.
     &lt;li&gt;Update&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
-In order to initialize all modules call CORE.startAll() method.
+<p>In order to initialize all modules call CORE.startAll() method.</p>
 <pre>
 CORE.startAll();
 </pre>
-In order to start a particular module then simply call start() method and pass the name of the module.
+<p>In order to start a particular module then simply call start() method and pass the name of the module.</p>
 <pre>
 CORE.start('moduleName');
 </pre>
