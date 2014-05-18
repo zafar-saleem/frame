@@ -250,6 +250,12 @@ var FRAME = {
         return document.createElement(el);
     },
 
+    /**
+	 * Apply attributes i.e. id, class, href etc to created element.
+	 * @param {object} DOM element to which attributes will be applied
+	 * @param {object} attributes object that has id, class etc.
+	 * @return {}
+	 */
     _applyAttrs: function (el, attrs) {
         $(el).attr(attrs);
     },
