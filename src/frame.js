@@ -237,6 +237,10 @@ var FRAME = {
 	_create: function (el) {
         return document.createElement(el);
     },
+
+    _applyAttrs: function (el, attrs) {
+        $(el).attr(attrs);
+    },
 	
 	/**
 	 * Check if paramter is a function
