@@ -1,8 +1,8 @@
 /*
- * CORE module/Object that consists of core functions
+ * FRAME module/Object that consists of Core methods
  * @author Zafar Saleem
  */
-var CORE = {
+var FRAME = {
 	/**
 	 * Main object that consists details for all modules upon registering.
 	 * Modules are stored as 
@@ -35,7 +35,7 @@ var CORE = {
 			this.modulesData['$container'] = $('#' + module);
 
 			if (obj.events && typeof obj.events === 'object') {
-				CORE.AggregatedEvents.init(obj);
+				FRAME.AggregatedEvents.init(obj);
 			}
 		} else {
 			this._log(3, 'Module name should be String & obj should be Object');
@@ -118,13 +118,13 @@ var CORE = {
 		 */
 		init: function (context) {
 			var events = context.events, keys;
-			if (!CORE._isObject(events)) return;
+			if (!FRAME._isObject(events)) return;
 
 			this.config.context = context;
 			for (keys in events) {
 				if (!events.hasOwnProperty(keys)) return;
 				this.config.callback = context[events[keys]];
-	    		if (!CORE._isMethod(this.config.callback)) return;
+	    		if (!FRAME._isMethod(this.config.callback)) return;
 	    		this.applyEvents(keys);
 			}
 		},
@@ -182,7 +182,7 @@ var CORE = {
 		trigger: function (events, context) {
 			if (!events && typeof events !== 'string') return;
 			if (this.eventsData.hasOwnProperty(events)) {
-				CORE._log(2, 'This event name is already taken!');
+				FRAME._log(2, 'This event name is already taken!');
 				return;
 			}
 			this.eventsData[events] = context;
