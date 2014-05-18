@@ -241,6 +241,11 @@ var FRAME = {
 		}
 	},
 
+	/**
+	 * Creates DOM element.
+	 * @param {object} DOM element that will be created by this method
+	 * @return {object} Created DOM element
+	 */
 	_create: function (el) {
         return document.createElement(el);
     },
