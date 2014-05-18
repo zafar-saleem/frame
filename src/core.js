@@ -74,8 +74,9 @@ var CORE = {
 	 * @param {object} Module that iscludes all methods
 	 * @return {}
 	 */
-	stop: function () {
-		console.log('stop');
+	stop: function (module) {
+		if (this._isMethod(module)) return;
+		module.destory.bind(module).apply();
 	},
 
 	/**
@@ -85,8 +86,16 @@ var CORE = {
 	 * @return {}
 	 */
 	stopAll: function () {
+		var modules = this.modulesData.modules;
 
-	},
+		if (typeof modules === 'undefined') return;
+		// if there are no modules registered then do nothing
+		if (Object.keys(modules).length <= 0) return;
+		for (var keys in modules) {
+			if (!modules.hasOwnProperty(keys)) return;
+			this.stop(modules[keys]);
+		}
+	},,
 
 	/**
 	 * Object that adds events to selectors and call callback functions
