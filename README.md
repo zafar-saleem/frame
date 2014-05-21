@@ -81,10 +81,6 @@ $('body').append(FRAME.createElement('ul', {
 <pre>
 FRAME.startAll();
 </pre>
-<p>In order to start a particular module then simply call start() method and pass the name of the module.</p>
-<pre>
-FRAME.start('moduleName');
-</pre>
 <h1>Directory structure</h1>
 <pre>
 example
@@ -99,6 +95,9 @@ example
   index.html
 src
   FRAME.js
+tests
+  specs
+    frame.js
 .jshintrc
 Gruntfile.js
 README.md
