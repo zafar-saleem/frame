@@ -36,6 +36,7 @@ FRAME.register('Todo', {
     deleteItem: function (e) {
         e.preventDefault();
         $(e.target).parent().remove();
+        this.$textfield.focus();
     },
     // sets up item needs to be updated
     setUpdates: function (e) {
