@@ -54,7 +54,7 @@ FRAME.register('Todo', {
         $span.text(item);
         this._emptyTextfield();
         this.$textfield.focus();
-        this.$button.text('Add').attr('id', 'add').removeClass('btn-primary').addClass('btn-success');
+        this.$button.text('Add').attr('id', 'btn-add').removeClass('btn-primary').addClass('btn-success');
     },
     // empty textfield
     _emptyTextfield: function () {
