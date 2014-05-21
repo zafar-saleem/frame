@@ -77,7 +77,7 @@ var FRAME = {
      * @return {object} Created DOM element
      */
     createElement: function (el, config) {
-        var i, text, child,
+        var i, text, child;
         el = this._create(el);
         if (!config) return;
         if (config.children && this._isArray(config.children)) {
