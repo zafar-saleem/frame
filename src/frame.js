@@ -48,6 +48,14 @@ var FRAME = {
      * @return {}
      */
     start: function (module) {
+        var mod = null;
+        
+        if (typeof module === 'string') {
+            if (!this.modulesData.modules.hasOwnProperty(module)) return;
+            mod = this.modulesData.modules[module];
+            mod.init.bind(mod).apply();
+            return;
+        }
         if (this._isMethod(module)) return;
         module.init.bind(module).apply();
     },

@@ -7,9 +7,9 @@ var FRAME = {
      * Main object that consists details for all modules upon registering.
      * Modules are stored as 
      * modulesData: {
-     * 		modules: {
-     *			nameofmodule: object
-     * 		}
+     *      modules: {
+     *          nameofmodule: object
+     *      }
      * }
      */
     modulesData: {},
@@ -44,10 +44,18 @@ var FRAME = {
 
     /**
      * This method initialize single module stored in modulesData: {}
-     * @param {object} Module that iscludes all methods
+     * @param {object} Module that includes all methods
      * @return {}
      */
     start: function (module) {
+        var mod = null;
+        
+        if (typeof module === 'string') {
+            if (!this.modulesData.modules.hasOwnProperty(module)) return;
+            mod = this.modulesData.modules[module];
+            mod.init.bind(mod).apply();
+            return;
+        }
         if (this._isMethod(module)) return;
         module.init.bind(module).apply();
     },
@@ -55,7 +63,7 @@ var FRAME = {
     /**
      * This method initializes all modules stored in modulesData: {}
      * by calling start method
-     * @param {object} Module that iscludes all methods
+     * @param {object} Module that includes all methods
      * @return {}
      */
     startAll: function () {
@@ -100,7 +108,7 @@ var FRAME = {
      * Object that adds events to selectors and call callback functions
      * in a module. This modules is for following events object
      * events: {
-     *		'click #selector': 'callback'
+     *      'click #selector': 'callback'
      * }
      */
     AggregatedEvents: {
@@ -147,13 +155,13 @@ var FRAME = {
                 if (selectors[i] === 0) continue;
                 this.bindEvents(keys.split(" ")[0], selectors[i]);
             }
-    	},
-    	
-    	/**
-    	 * It binds event to selector and call callback function
-    	 * @param {evt} event name e.g. click, hover etc that needs to attached to selector
-    	 * @param {string} selector on which event needs to be attached.
-    	 */
+        },
+        
+        /**
+         * It binds event to selector and call callback function
+         * @param {evt} event name e.g. click, hover etc that needs to attached to selector
+         * @param {string} selector on which event needs to be attached.
+         */
         bindEvents: function (evt, selector) {
             $(document).on(evt, selector, this.config.callback.bind(this.config.context));
         },
