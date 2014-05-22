@@ -44,7 +44,7 @@ var FRAME = {
 
     /**
      * This method initialize single module stored in modulesData: {}
-     * @param {object} Module that iscludes all methods
+     * @param {object} Module that includes all methods
      * @return {}
      */
     start: function (module) {
@@ -55,7 +55,7 @@ var FRAME = {
     /**
      * This method initializes all modules stored in modulesData: {}
      * by calling start method
-     * @param {object} Module that iscludes all methods
+     * @param {object} Module that includes all methods
      * @return {}
      */
     startAll: function () {
