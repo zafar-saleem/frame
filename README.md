@@ -81,6 +81,10 @@ $('body').append(FRAME.createElement('ul', {
 <pre>
 FRAME.startAll();
 </pre>
+<p>To start a single module simple call start() method and pass the name of module as parameter.</p>
+<pre>
+FRAME.start('moduleName');
+</pre>
 <p>In order to start a particular module then simply call start() method and pass the name of the module.</p>
 <pre>
 FRAME.start('moduleName');
