@@ -32,6 +32,7 @@ var FRAME = {
             if (typeof this.modulesData.modules === 'undefined') this.modulesData['modules'] = {};
             this.modulesData.modules[module] = obj; // Store module's object inside modulesData.modules
 
+            // attach parent DOM element of component to this particular module
             obj['$el'] = $('#' + module);
 
             if (obj.events && typeof obj.events === 'object') {
