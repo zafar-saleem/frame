@@ -27,12 +27,12 @@ var FRAME = {
                 this._log(3, 'Module does not have init method');
                 return;
             }
+
             // If modules object inside modulesData does not exist then create one
             if (typeof this.modulesData.modules === 'undefined') this.modulesData['modules'] = {};
             this.modulesData.modules[module] = obj; // Store module's object inside modulesData.modules
 
-            if (typeof this.modulesData.$container === 'undefined') this.modulesData['$container'] = {};
-            this.modulesData['$container'] = $('#' + module);
+            obj['$el'] = $('#' + module);
 
             if (obj.events && typeof obj.events === 'object') {
                 FRAME.AggregatedEvents.init(obj);

@@ -9,9 +9,9 @@ FRAME.register('Todo', {
     },
     // init/constructor that initializes
     init: function () {
-        this.$textfield = $('.item');
-        this.$items     = $('#items');
-        this.$button    = $('.button');
+        this.$textfield = this.$el.find('.item');
+        this.$items     = this.$el.find('#items');
+        this.$button    = this.$el.find('.button');
         this.counter    = 1;
         this.itemId     = null;
     },
