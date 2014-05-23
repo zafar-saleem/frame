@@ -23,8 +23,8 @@ var FRAME = {
      */
     register: function (module, obj) {
         if (this._isString(module) && this._isObject(obj)) {
-            if (!this._isMethod(obj.init) && !this._isMethod(obj.destroy)) {
-                this._log(3, 'Module does not have init and/or destroy methods');
+            if (!this._isMethod(obj.init)) {
+                this._log(3, 'Module does not have init method');
                 return;
             }
             // If modules object inside modulesData does not exist then create one
