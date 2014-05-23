@@ -22,7 +22,7 @@ var FRAME = {
      * @return {}
      */
     register: function (module, obj) {
-        if (this._isString(module) && this._isObject(obj)) {
+        if (module && this._isString(module) && obj && this._isObject(obj)) {
             if (!this._isMethod(obj.init)) {
                 this._log(3, 'Module does not have init method');
                 return;
