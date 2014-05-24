@@ -8,6 +8,24 @@ FRAME.register('moduleName', {
 });
 </pre>
 
+<p>The name of the module must be identical to the id of the component e.g.</p>
+
+<pre>
+<div id="Todo">
+  <!-- rest of DOM elements -->
+</div>
+// JavaScript module with the name of Todo
+FRAME.register('Todo', {
+  // rest of the code
+});
+</pre>
+
+<p>Above is mandatory, this way 'Todo' div element(component) is attached to this module thus, that element could be accessed like below, in entire module.</p>
+
+<pre>
+  this.$el;
+</pre>
+
 <p>Every new module must contain one init function(which acts like a constructor). It is used to initialize the module.</p>
 
 <pre>
