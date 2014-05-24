@@ -11,9 +11,9 @@ FRAME.register('moduleName', {
 <p>The name of the module must be identical to the id of the component e.g.</p>
 
 <pre>
-<div id="Todo">
-  <!-- rest of DOM elements -->
-</div>
+&lt;div id="Todo"&gt;
+  &lt;!-- rest of DOM elements --&gt;
+&lt;/div&gt;
 // JavaScript module with the name of Todo
 FRAME.register('Todo', {
   // rest of the code
