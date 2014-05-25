@@ -1,9 +1,11 @@
-/*
- * FRAME module/Object that consists of Core methods
- * @author Zafar Saleem
+/**
+ *
+ * (c) 2014 Zafar Saleem
+ * 
  */
 var FRAME = {
     /**
+     * 
      * Main object that consists details for all modules upon registering.
      * Modules are stored as 
      * modulesData: {
@@ -17,6 +19,7 @@ var FRAME = {
     /**
      * Register method registers modules and stores them in
      * modulesData object.
+     * 
      * @param {string} name of module
      * @param {object} object of module
      * @return {}
@@ -32,9 +35,10 @@ var FRAME = {
             if (typeof this.modulesData.modules === 'undefined') this.modulesData['modules'] = {};
             this.modulesData.modules[module] = obj; // Store module's object inside modulesData.modules
 
-            // attach parent DOM element of component to this particular module
-            obj['$el'] = $('#' + module);
-
+            if (!this._isModuleCorrect(obj, module)) {
+                return;
+            }
+            
             if (obj.events && typeof obj.events === 'object') {
                 FRAME.AggregatedEvents.init(obj);
             }
@@ -45,8 +49,8 @@ var FRAME = {
 
     /**
      * This method initialize single module stored in modulesData: {}
+     * 
      * @param {object} Module that includes all methods
-     * @return {}
      */
     start: function (module) {
         var mod = null;
@@ -63,7 +67,8 @@ var FRAME = {
 
     /**
      * This method initializes all modules stored in modulesData: {}
-     * by calling start method
+     * by calling start method.
+     * 
      * @param {object} Module that includes all methods
      * @return {}
      */
@@ -81,6 +86,7 @@ var FRAME = {
     /**
      * Creates new DOM element and apply all attributes such as
      * Class name, id, href etc.
+     * 
      * @param {object} DOM element that will be created by this method
      * @param {object} List of attributes i.e. id, class, href etc.
      * @return {object} Created DOM element
@@ -91,7 +97,7 @@ var FRAME = {
         if (!config) return;
         if (config.children && this._isArray(config.children)) {
             i = 0;
-            while(child = config.children[i]) {
+            while (child = config.children[i]) {
                 el.appendChild(child);
                 i++;
             }
@@ -122,6 +128,7 @@ var FRAME = {
         * constructor function that initialize AggregatedEvents object,
         * it gets callback function from events object and store it in config.callback,
         * then calls applyEvents method.
+        * 
         * @param {object} context of modules where events object is defined
         */
         init: function (context) {
@@ -141,6 +148,7 @@ var FRAME = {
         * Checks for multiple selectors, if given then seperate them and put them
         * in an array then bind events to all those selectors.
         * If single selector is given then apply event to that selector.
+        * 
         * @param {string} properties of events object
         * @return {}
         */
@@ -160,6 +168,7 @@ var FRAME = {
         
         /**
          * It binds event to selector and call callback function
+         * 
          * @param {evt} event name e.g. click, hover etc that needs to attached to selector
          * @param {string} selector on which event needs to be attached.
          */
@@ -183,6 +192,7 @@ var FRAME = {
 
         /**
          * Stores events and context in eventsData object as key value pair
+         * 
          * @param {String} Event name
          * @param {Object} Context(this) to module from where this events is triggered
          * @return {}
@@ -198,6 +208,7 @@ var FRAME = {
 
         /**
          * Calls events when required
+         * 
          * @param {String} Event name
          * @param {Function} Callback function that needs to be called upon
          * @param {Object} Context(this) to module from where listen() function id called
@@ -213,6 +224,7 @@ var FRAME = {
 
         /**
          * Get context
+         * 
          * @param {Object} Context(this) to module from where this events is triggered
          * @return {}
          */
@@ -223,7 +235,43 @@ var FRAME = {
     },
 
     /**
+     * Check if Module begin with Capital letter then convert moduleName
+     * to jQuery DOM element and make module's property to make it accessable
+     * using $el i.e. this.$el. Then put all descendents of this components
+     * in module property and to make them accessable using $tagname inside this
+     * particular module.
+     *
+     * @private
+     * @param {object} object of module
+     * @param {module} name of module
+     * @return {boolean} true/false
+     */
+    _isModuleCorrect: function (obj, module) {
+        var els, i, len, counter = 1;
+
+        if (!/^[A-Z]/.test(module)) {
+            this._log(3, 'Module must be equal to component ID and must begin with capital letter.');
+            return false;
+        }
+
+        obj['$el'] = $('#' + module);
+
+        els = $('#' + module + ' *').get();
+
+        for (i = 0, len = els.length; i < len; i++) {
+            if (obj.hasOwnProperty('$' + els[i].nodeName.toLowerCase())) {
+                obj['$' + els[i].nodeName.toLowerCase() + '' + counter] = $(els[i]);
+                counter++;
+                continue;
+            }
+            obj['$' + els[i].nodeName.toLowerCase()] = $(els[i]);
+        }
+        return true;
+    },
+
+    /**
      * Creates DOM element.
+     * 
      * @private
      * @param {object} DOM element that will be created by this method
      * @return {object} Created DOM element
@@ -234,6 +282,7 @@ var FRAME = {
 
     /**
      * Apply attributes i.e. id, class, href etc to create element.
+     * 
      * @private
      * @param {object} DOM element to which attributes will be applied
      * @param {object} attributes object that has id, class etc.
@@ -245,6 +294,7 @@ var FRAME = {
 
     /**
      * Check for array.
+     * 
      * @private
      * @param {array} Array to check if it is array.
      * @return {boolean} true/false
@@ -255,6 +305,7 @@ var FRAME = {
 
     /**
      * Check if paramter is a function
+     * 
      * @private
      * @param {Function}
      * @return {Boolean} true/false
@@ -265,6 +316,7 @@ var FRAME = {
 
     /**
      * Check if paramter is an Object
+     * 
      * @private
      * @param {Object}
      * @return {Boolean} true/false
@@ -275,6 +327,7 @@ var FRAME = {
 
     /**
      * Check if paramter is a String
+     * 
      * @private
      * @param {String}
      * @return {Boolean} true/false
@@ -285,6 +338,7 @@ var FRAME = {
 
     /**
      * Log function
+     * 
      * @private
      * @param {Number} 1-3
      * @param {String} Message
