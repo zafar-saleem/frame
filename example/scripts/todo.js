@@ -19,11 +19,11 @@ FRAME.register('Todo', {
         var item = this.$input.val();
         if (!item) return;
 
-        this.$ul.prepend(FRAME.createElement('li', {
+        this.$ul.prepend(this.createElement('li', {
             children: [
-                FRAME.createElement('span', { id: 'item-' + this.counter, text: item }),
-                FRAME.createElement('a', { 'class': 'delete', text: 'Delete', href: '#' }),
-                FRAME.createElement('a', { 'class': 'update', text: 'Update', href: '#' })
+                this.createElement('span', { id: 'item-' + this.counter, text: item }),
+                this.createElement('a', { 'class': 'delete', text: 'Delete', href: '#' }),
+                this.createElement('a', { 'class': 'update', text: 'Update', href: '#' })
             ]
         }));
 
@@ -59,7 +59,7 @@ FRAME.register('Todo', {
         this.$input.focus();
         this.$button.text('Add').attr('id', 'btn-add').removeClass('btn-primary').addClass('btn-success');
     },
-    
+
     // empty textfield
     _emptyTextfield: function () {
         this.$input.val('');

@@ -1,11 +1,9 @@
-/*
- * FRAME module/Object that consists of Core methods
- * 
- * @author Zafar Saleem
+/**
+ * (c) 2014 Zafar Saleem
  */
 var FRAME = {
     /**
-    * 
+     * 
      * Main object that consists details for all modules upon registering.
      * Modules are stored as 
      * modulesData: {
@@ -25,9 +23,9 @@ var FRAME = {
      * @return {}
      */
     register: function (module, obj) {
-        if (module && this._isString(module) && obj && this._isObject(obj)) {
-            if (!this._isMethod(obj.init)) {
-                this._log(3, 'Module does not have init method');
+        if (module && _privateMethods.isString(module) && obj && _privateMethods.isObject(obj)) {
+            if (!_privateMethods.isMethod(obj.init)) {
+                _privateMethods.log(3, 'Module does not have init method');
                 return;
             }
 
@@ -35,15 +33,17 @@ var FRAME = {
             if (typeof this.modulesData.modules === 'undefined') this.modulesData['modules'] = {};
             this.modulesData.modules[module] = obj; // Store module's object inside modulesData.modules
 
-            if (!this._isModuleCorrect(obj, module)) {
+            if (!_privateMethods.isModuleCorrect(obj, module)) {
                 return;
             }
 
+            _privateMethods.makeFrameAPI(this, obj);
+
             if (obj.events && typeof obj.events === 'object') {
-                FRAME.AggregatedEvents.init(obj);
+                AggregatedEvents.init(obj);
             }
         } else {
-            this._log(3, 'Module name should be String & obj should be Object');
+            _privateMethods.log(3, 'Module name should be String & obj should be Object');
         }
     },
 
@@ -61,7 +61,7 @@ var FRAME = {
             mod.init.bind(mod).apply();
             return;
         }
-        if (this._isMethod(module)) return;
+        if (_privateMethods.isMethod(module)) return;
         module.init.bind(module).apply();
     },
 
@@ -93,9 +93,9 @@ var FRAME = {
      */
     createElement: function (el, config) {
         var i, text, child;
-        el = this._create(el);
+        el = _privateMethods.create(el);
         if (!config) return;
-        if (config.children && this._isArray(config.children)) {
+        if (config.children && _privateMethods.isArray(config.children)) {
             i = 0;
             while (child = config.children[i]) {
                 el.appendChild(child);
@@ -107,80 +107,8 @@ var FRAME = {
             el.appendChild(document.createTextNode(config.text));
             delete config.text;
         }
-        this._applyAttrs(el, config);
+        _privateMethods.applyAttrs(el, config);
         return el;
-    },
-
-    /**
-     * Object that adds events to selectors and call callback functions
-     * in a module. This modules is for following events object
-     * events: {
-     *      'click #selector': 'callback'
-     * }
-     */
-    AggregatedEvents: {
-        config: {
-            context: null,
-            callback: null
-        },
-
-        /**
-        * constructor function that initialize AggregatedEvents object,
-        * it gets callback function from events object and store it in config.callback,
-        * then calls applyEvents method.
-        * 
-        * @param {object} context of modules where events object is defined
-        */
-        init: function (context) {
-            var events = context.events, keys;
-            if (!FRAME._isObject(events)) return;
-
-            this.config.context = context;
-            for (keys in events) {
-                if (!events.hasOwnProperty(keys)) return;
-                this.config.callback = context[events[keys]];
-                if (!FRAME._isMethod(this.config.callback)) return;
-                this.applyEvents(keys);
-            }
-        },
-
-        /**
-        * Checks for multiple selectors, if given then seperate them and put them
-        * in an array then bind events to all those selectors.
-        * If single selector is given then apply event to that selector.
-        * 
-        * @param {string} properties of events object
-        * @return {}
-        */
-        applyEvents: function (keys) {
-            var i, len, selectors = this.getSelectors(keys.split(" "));
-
-            if (selectors.length === 1) {
-                this.bindEvents(keys.split(" ")[0], keys.split(" ")[1]);
-                return;
-            }
-
-            for (i = 0, len = selectors.length; i < len; i++) {
-                if (selectors[i] === 0) continue;
-                this.bindEvents(keys.split(" ")[0], selectors[i]);
-            }
-        },
-        
-        /**
-         * It binds event to selector and call callback function
-         * 
-         * @param {evt} event name e.g. click, hover etc that needs to attached to selector
-         * @param {string} selector on which event needs to be attached.
-         */
-        bindEvents: function (evt, selector) {
-            $(document).on(evt, selector, this.config.callback.bind(this.config.context));
-        },
-
-        getSelectors: function (arr) {
-            return arr.filter(function (item, index) {
-                return (index !== 0) || item;
-            });
-        }
     },
 
     /**
@@ -200,7 +128,7 @@ var FRAME = {
         trigger: function (events, context) {
             if (!events && typeof events !== 'string') return;
             if (this.eventsData.hasOwnProperty(events)) {
-                FRAME._log(2, 'This event name is already taken!');
+                _privateMethods.log(2, 'This event name is already taken!');
                 return;
             }
             this.eventsData[events] = context;
@@ -232,6 +160,15 @@ var FRAME = {
             if (context && typeof context === 'object') return context;
             if (module && typeof module === 'object') return module;
         }
+    }
+};
+
+var _privateMethods = {
+    makeFrameAPI: function (frame, obj) {
+        for (var key in frame) {
+            if (!frame.hasOwnProperty(key)) return;
+            obj[key] = frame[key];
+        }
     },
 
     /**
@@ -246,11 +183,11 @@ var FRAME = {
      * @param {module} name of module
      * @return {boolean} true/false
      */
-    _isModuleCorrect: function (obj, module) {
+    isModuleCorrect: function (obj, module) {
         var els, i, len, counter = 1;
 
         if (!/^[A-Z]/.test(module)) {
-            this._log(3, 'Module must be equal to component ID and must begin with capital letter.');
+            this.log(3, 'Module must be equal to component ID and must begin with capital letter.');
             return false;
         }
 
@@ -276,7 +213,7 @@ var FRAME = {
      * @param {object} DOM element that will be created by this method
      * @return {object} Created DOM element
      */
-    _create: function (el) {
+    create: function (el) {
         return document.createElement(el);
     },
 
@@ -288,7 +225,7 @@ var FRAME = {
      * @param {object} attributes object that has id, class etc.
      * @return {}
      */
-    _applyAttrs: function (el, attrs) {
+    applyAttrs: function (el, attrs) {
         $(el).attr(attrs);
     },
 
@@ -299,7 +236,7 @@ var FRAME = {
      * @param {array} Array to check if it is array.
      * @return {boolean} true/false
      */
-    _isArray: function (arr) {
+    isArray: function (arr) {
         return (Array.isArray(arr));
     },
 
@@ -310,7 +247,7 @@ var FRAME = {
      * @param {Function}
      * @return {Boolean} true/false
      */
-    _isMethod: function (method) {
+    isMethod: function (method) {
         return (method && typeof method === 'function');
     },
 
@@ -321,7 +258,7 @@ var FRAME = {
      * @param {Object}
      * @return {Boolean} true/false
      */
-    _isObject: function (object) {
+    isObject: function (object) {
         return (object && typeof object === 'object');
     },
 
@@ -332,7 +269,7 @@ var FRAME = {
      * @param {String}
      * @return {Boolean} true/false
      */
-    _isString: function (str) {
+    isString: function (str) {
         return (str && typeof str === 'string');
     },
 
@@ -343,7 +280,85 @@ var FRAME = {
      * @param {Number} 1-3
      * @param {String} Message
      */
-    _log: function (severity, message) {
+    log: function (severity, message) {
         console[(severity === 1 ? 'log' : (severity === 2) ? 'warn' : 'error')](message);
+    }
+};
+
+/**
+ * Object that adds events to selectors and call callback functions
+ * in a module. This modules is for following events object
+ * events: {
+ *      'click #selector': 'callback'
+ * }
+ */
+var AggregatedEvents = {
+    config: {
+        context: null,
+        callback: null
+    },
+
+    /**
+    * constructor function that initialize AggregatedEvents object,
+    * it gets callback function from events object and store it in config.callback,
+    * then calls applyEvents method.
+    * 
+    * @param {object} context of modules where events object is defined
+    */
+    init: function (context) {
+        var events = context.events, keys;
+        if (!_privateMethods.isObject(events)) return;
+
+        this.config.context = context;
+        for (keys in events) {
+            if (!events.hasOwnProperty(keys)) return;
+            this.config.callback = context[events[keys]];
+            if (!_privateMethods.isMethod(this.config.callback)) return;
+            this.applyEvents(keys);
+        }
+    },
+
+    /**
+    * Checks for multiple selectors, if given then seperate them and put them
+    * in an array then bind events to all those selectors.
+    * If single selector is given then apply event to that selector.
+    * 
+    * @param {string} properties of events object
+    * @return {}
+    */
+    applyEvents: function (keys) {
+        var i, len, selectors = this.getSelectors(keys.split(" "));
+
+        if (selectors.length === 1) {
+            this.bindEvents(keys.split(" ")[0], keys.split(" ")[1]);
+            return;
+        }
+
+        for (i = 0, len = selectors.length; i < len; i++) {
+            if (selectors[i] === 0) continue;
+            this.bindEvents(keys.split(" ")[0], selectors[i]);
+        }
+    },
+    
+    /**
+     * It binds event to selector and call callback function
+     * 
+     * @param {evt} event name e.g. click, hover etc that needs to attached to selector
+     * @param {string} selector on which event needs to be attached.
+     */
+    bindEvents: function (evt, selector) {
+        $(document).on(evt, selector, this.config.callback.bind(this.config.context));
+    },
+
+    /**
+     * Return total number of selectors on which the event will bind
+     * 
+     * @param {array} Array of selectors
+     * @return {array} Array of selectors
+     */
+    getSelectors: function (arr) {
+        return arr.filter(function (item, index) {
+            return (index !== 0) || item;
+        });
     }
 };
