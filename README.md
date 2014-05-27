@@ -26,6 +26,22 @@ FRAME.register('Todo', {
   this.$el;
 </pre>
 
+<p>
+  Attaching DOM element, like above, also allows to access children nodes easy. For example,
+</p>
+
+<pre>
+  &lt;div id="Todo"&gt;
+    &lt;h2&gt;Title&lt;/h2&gt;
+  &lt;/div&gt;
+</pre>
+
+<p>To access h2 inside 'Todo' module like below</p>
+
+<pre>
+  this.$h2
+</pre>
+
 <p>Every new module must contain one init function(which acts like a constructor). It is used to initialize the module.</p>
 
 <pre>
