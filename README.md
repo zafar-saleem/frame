@@ -97,9 +97,9 @@ FRAME.register('newModuleName', {
 <pre>
 $('body').append(FRAME.createElement('ul', {
     children: [
-        FRAME.createElement('li', { 'class': 'li', text: 'item' }),
-        FRAME.createElement('li', { 'class': 'li', text: 'Delete' }),
-        FRAME.createElement('li', { 'class': 'li', text: 'Update' })
+        this.createElement('li', { 'class': 'li', text: 'item' }),
+        this.createElement('li', { 'class': 'li', text: 'Delete' }),
+        this.createElement('li', { 'class': 'li', text: 'Update' })
     ]
 }));
 </pre>
