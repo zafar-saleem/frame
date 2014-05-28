@@ -164,6 +164,16 @@ var FRAME = {
 };
 
 var _privateMethods = {
+    /**
+     * Make all methods inside FRAME object part of the module so that
+     * these method could be accessed using the 'this' keyword e.g.
+     * this.createElement() method.
+     * 
+     * @private
+     * @param {object} object of module
+     * @param {module} name of module
+     * @return {boolean} true/false
+     */
     makeFrameAPI: function (frame, obj) {
         for (var key in frame) {
             if (!frame.hasOwnProperty(key)) return;
@@ -185,16 +195,19 @@ var _privateMethods = {
      */
     isModuleCorrect: function (obj, module) {
         var els, i, len, counter = 1;
-
+        // check for module first letter if it starts from capital letter or not.
         if (!/^[A-Z]/.test(module)) {
             this.log(3, 'Module must be equal to component ID and must begin with capital letter.');
             return false;
         }
-
+        // Make module name a jQuery DOM element and make it a property of that module
         obj['$el'] = $('#' + module);
 
+        // Get all nodes inside current components
         els = $('#' + module + ' *').get();
 
+        // Make all child nodes property of that module like $input: $(input) therefore,
+        // these can be accessed with the 'this' keyword.
         for (i = 0, len = els.length; i < len; i++) {
             if (obj.hasOwnProperty('$' + els[i].nodeName.toLowerCase())) {
                 obj['$' + els[i].nodeName.toLowerCase() + '' + counter] = $(els[i]);
