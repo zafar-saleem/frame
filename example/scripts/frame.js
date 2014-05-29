@@ -1,4 +1,8 @@
 /**
+ * FRAME API, all of the methods inside FRAME objects are public and
+ * will become properties of inherited module which can be accessed 
+ * via 'this' keyword.
+ * 
  * (c) 2014 Zafar Saleem
  */
 var FRAME = {
@@ -76,7 +80,8 @@ var FRAME = {
         var modules = this.modulesData.modules;
 
         if (typeof modules === 'undefined') return;
-        if (Object.keys(modules).length <= 0) return; // if there are no modules registered then do nothing
+        // if there are no modules registered then do nothing
+        if (Object.keys(modules).length <= 0) return;
         for (var keys in modules) {
             if (!modules.hasOwnProperty(keys)) return;
             this.start(modules[keys]);
@@ -163,6 +168,10 @@ var FRAME = {
     }
 };
 
+/**
+ * Private objects that contains private methods which could only be accessed
+ * inside FRAME.
+ */
 var _privateMethods = {
     /**
      * Make all methods inside FRAME object part of the module so that
